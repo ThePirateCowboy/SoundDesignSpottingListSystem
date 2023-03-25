@@ -18,5 +18,5 @@ def hide_terminal():
         AppKit.NSApplication.sharedApplication().setActivationPolicy_(1)
 
 if __name__ == "__main__":
-    hide_terminal()
+    #hide_terminal()
     main()
