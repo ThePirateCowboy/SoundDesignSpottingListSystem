@@ -1,4 +1,5 @@
 # launcher_windows.spec
+# -*- mode: python ; coding: utf-8 -*-
 import sys
 from PyInstaller.utils.hooks import collect_data_files, collect_submodules
 sys.modules['FixTk'] = None
@@ -23,7 +24,7 @@ a = Analysis(['launcher.py'],
              win_private_assemblies=False,
              cipher=block_cipher,
              noarchive=False)
-             
+
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
 
@@ -38,4 +39,4 @@ exe = EXE(pyz,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
-          console=True )
+          console=True)
