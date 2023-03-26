@@ -1,23 +1,27 @@
-import os
 import sys
-import platform
-from run_crossplatform_update_flac_metadata import main
+sys.path.append("c:/users/b/appdata/roaming/reaper/scripts/sounddesignspottinglistsystem/crossplatform/my_windows_virtual_environment_crossplatform/lib/site-packages")
+
+import os
+import ctypes
+import subprocess
 
 def hide_terminal():
-    if platform.system() == "Windows":
-        import ctypes
+    if sys.stdout is not None and sys.stdout.isatty():
+        hwnd = ctypes.windll.kernel32.GetConsoleWindow()
+        if hwnd:
+            ctypes.windll.user32.ShowWindow(hwnd, 0)
 
-        hWnd = ctypes.windll.kernel32.GetConsoleWindow()
-        if hWnd:
-            ctypes.windll.user32.ShowWindow(hWnd, 0)
+def main():
+    #hide_terminal()
 
-    elif platform.system() == "Darwin":
-        import AppKit
+    script_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'run_crossplatform_update_flac_metadata.py')
+    python_executable = sys.executable
 
-        AppKit.NSApplication.sharedApplication().activateIgnoringOtherApps_(True)
-        AppKit.NSApplication.sharedApplication().setActivationPolicy_(1)
+    print(f"Python Executable: {python_executable}")
+    print(f"Script Path: {script_path}")
+
+    result = subprocess.call([python_executable, script_path])
+    print(f"Script Result: {result}")
 
 if __name__ == "__main__":
-    hide_terminal()
     main()
-

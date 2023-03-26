@@ -3,12 +3,7 @@ import sys
 import subprocess
 
 def run_python_script(script_path):
-    if sys.platform == 'win32':
-        python_executable = 'python'
-    else:
-        python_executable = 'python3'
-
-    command = f'{python_executable} "{script_path}"'
+    command = f'{sys.executable} "{script_path}"'
     subprocess.run(command, shell=True)
 
 def main():
@@ -24,4 +19,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

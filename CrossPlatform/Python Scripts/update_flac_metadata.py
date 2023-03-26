@@ -61,6 +61,7 @@ def export_filenames_to_csv(file_paths, output_file):
 
 def main():
     root = Tk()
+    root.update()
     root.withdraw()
 
     file_paths = filedialog.askopenfilenames(
