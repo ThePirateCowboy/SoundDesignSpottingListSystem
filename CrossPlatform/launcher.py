@@ -1,23 +1,25 @@
 import os
 import sys
-import platform
-from run_crossplatform_update_flac_metadata import main
+import subprocess
 
-def hide_terminal():
-    if platform.system() == "Windows":
-        import ctypes
+# Determine the directory where this script is located
+script_directory = os.path.dirname(os.path.abspath(sys.argv[0]))
 
-        hWnd = ctypes.windll.kernel32.GetConsoleWindow()
-        if hWnd:
-            ctypes.windll.user32.ShowWindow(hWnd, 0)
+# Go up one level to the 'CrossPlatform' folder
+crossplatform_directory = os.path.dirname(script_directory)
 
-    elif platform.system() == "Darwin":
-        import AppKit
+# Define the path to the 'update_flac_metadata.py' script
+update_flac_metadata_path = os.path.join(crossplatform_directory, 'Python Scripts', 'update_flac_metadata.py')
 
-        AppKit.NSApplication.sharedApplication().activateIgnoringOtherApps_(True)
-        AppKit.NSApplication.sharedApplication().setActivationPolicy_(1)
+# Replace the path below with the full path to the desired Python interpreter on your system
+python_path = "C:\\Users\\B\\AppData\\Local\\Programs\\Python\\Python39\\python.exe"
 
-if __name__ == "__main__":
-    hide_terminal()
-    main()
+# Run the 'update_flac_metadata.py' script using a new command prompt that stays open
+# subprocess.call(f'cmd.exe /k "{python_path} \"{update_flac_metadata_path}\""')
+
+# Run the 'update_flac_metadata.py' script without opening a new command prompt
+startupinfo = subprocess.STARTUPINFO()
+startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+
+subprocess.Popen([python_path, update_flac_metadata_path], startupinfo=startupinfo)
 
